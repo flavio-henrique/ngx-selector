@@ -1,3 +1,10 @@
-<h1>
-  <ngx-selector></ngx-selector>
-</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 form-group">
+      <label for="exampleInputEmail1">NGX-Selector</label>
+
+      <ngx-selector [className]="'form-control'" [options]="options" [label]="'name'" (selectedChange)="onSelected($event)"  [selected]="selected"></ngx-selector>
+    </div>
+    {{selected.name}}
+  </div>
+</div>

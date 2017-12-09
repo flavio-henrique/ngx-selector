@@ -1,61 +1,65 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'ngx-selector',
   templateUrl: './selector.component.html',
   styleUrls: ['./selector.component.css']
 })
-export class SelectorComponent implements OnInit {
-
-  selected: any;
-  options: any = [
-    { id: 1, name: 'teste' },
-    { id: 1, name: 'teste2' },
-    { id: 1, name: 'asd' },
-    { id: 1, name: 'asdasd' },
-    { id: 1, name: 'asd' },
-    { id: 1, name: 'werw' },
-    { id: 1, name: '234234' },
-    { id: 1, name: 'asdasd' },
-    { id: 1, name: 'asd' },
-    { id: 1, name: 'werw' },
-    { id: 1, name: '234234' },
-    { id: 1, name: 'asdasd' },
-    { id: 1, name: 'asd' },
-    { id: 1, name: 'werw' },
-    { id: 1, name: '234234' }
-  ];
-  optionsFiltered = this.options;
+export class SelectorComponent {
+  @Output() selectedChange = new EventEmitter<any>();
+  @Input() options: any;
+  @Input() label: string;
+  @Input() className: string
+  @Input()
+  get selected() {
+    return this.selectedOption;
+  }
+  set selected(value) {
+    this.selectedOption = value;
+    this.selectedChange.emit(this.selectedOption);
+  }
+  selectedOption: any;
+  optionsFiltered;;
   showOptions: boolean;
   constructor() { }
 
   ngOnInit() {
+    this.optionsFiltered = this.options;
   }
 
   setOption(option: any) {
-    this.selected = option.name;
+    this.selected = option;
     this.showOptions = false;
-    console.log(option);
   }
 
-  onInputClick(test:any){
+  onInputClick(test: any) {
     this.showOptions = true;
-    console.log(test);
   }
 
-  onInputChange(value:any){
-    this.optionsFiltered = this.options.filter((elem)=> {
-      console.log(elem.name.indexOf(value));
+  onInputChange(value: any) {
+    this.optionsFiltered = this.options.filter((elem) => {
       return elem.name.indexOf(value) !== -1;
     });
   }
 
-  onfocus(){
+  onfocus() {
     this.showOptions = true;
   }
 
-  onFocusOut(event:any){
-    //setTimeout(() => { this.showOptions = false; }, 150);
+  clearSelector() {
+    this.selected = {};
+    this.optionsFiltered = this.options;
+  }
+
+  onFocusOut(event: any) {
+
+    setTimeout(() => {
+      if (!this.optionsFiltered || !this.selected || !this.optionsFiltered.length ) {
+        this.clearSelector();
+      }
+      this.showOptions = false;
+    }, 150);
   }
 
 }
