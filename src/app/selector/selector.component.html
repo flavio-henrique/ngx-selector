@@ -1,0 +1,8 @@
+<div class="box-selector">
+  <input class="selector-input" (focus)="onfocus()" (ngModelChange)="onInputChange($event)" (focusout)="onFocusOut($event)" [ngModel]="selected" type="text">
+  <div *ngIf="showOptions" class="box-options">
+    <ul>
+      <li (click)="setOption(value)" *ngFor='let value of optionsFiltered'>{{value.name}}</li>
+    </ul>
+  </div>
+</div>

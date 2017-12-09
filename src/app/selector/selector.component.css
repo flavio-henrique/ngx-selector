@@ -1,0 +1,48 @@
+ul{
+    margin: 0;
+    list-style: none;
+    padding: 0;
+}
+
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-top: 4px solid\9;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+
+.box-options{
+    position: absolute;
+    border: 1px solid gray;
+    width: 100%;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
+.selector-input{
+    outline: 0;
+    -webkit-appearance: menulist;
+    cursor: default;
+}
+
+.selector-input:focus{
+    cursor: text;
+}
+
+.box-selector{
+    position: absolute;
+}
+ul li{
+    font-size: 13px;
+    padding: 5px 10px;
+}
+
+ul li:hover{
+    background: #eaeaea;
+    cursor: default;
+}
